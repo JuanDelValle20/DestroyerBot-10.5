@@ -20,8 +20,6 @@ Banear a personas el uso del bot
 Level para tus grupos
 ○ ${prefix}antimenu
 Su nombre lo dice todo (antilink)
-○ ${prefix}otak
-Monas chinas
 ○ ${prefix}shantera
 Interactua con el bot
 
@@ -85,10 +83,14 @@ Comando de bienvenida solo grupos
   ╠ Dar admin a un miembro
   ╠ ○ ${prefix}demote
   ╠ Quitar el admin
+  ╠ ○ ${prefix}kick
+  ╠ Agrega a la persona que deseás eliminar
   ╠ ○ ${prefix}linkgc
   ╠ Link del grupo
   ╠ ○ ${prefix}adminlist
   ╠ Nombra a los admins del grupo
+  ╠ ○ ${prefix}x
+  ╠ Envia un texto para nombrar a todos
   ╠ ○ ${prefix}todos
   ╚ Nombra a todos los del grupo
 
