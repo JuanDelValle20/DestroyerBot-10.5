@@ -10,15 +10,17 @@ Cualquier copia que utilize mi ApiKey sera dado de baja
 * Nada
 */
 
-const {
-    WAConnection,
-    MessageType,
-    Presence,
-    Mimetype,
-    rugaapi,
-    GroupSettingChange
-} = require('@adiwajshing/baileys')
+const { 
+	WAConnection,
+	MessageType, 
+	ReconnectMode, 
+	Presence, 
+	Mimetype, 
+	rugaapi, 
+	GroupSettingChange 
+} = require('@adiwajshing/baileys');
 
+////
 /******COMIENZO DE LA ENTRADA DEL ARCHIVO******/
 const { color, bgcolor } = require('./lib/color')
 const { bahasa } = require('./src/bahasa')
@@ -33,6 +35,7 @@ const { recognize } = require('./lib/ocr')
 const fs = require('fs')
 const moment = require('moment-timezone')
 const { exec } = require('child_process')
+let FormData = require('form-data')
 const kagApi = require('@kagchi/kag-api')
 const axios = require("axios")
 const fetch = require('node-fetch')
@@ -110,72 +113,72 @@ const antidiscord = JSON.parse(fs.readFileSync('./src/antidiscord.json'))
 
 //LEVEL INICIO
 const getLevelingXp = (userId) => {
-            let position = false
-            Object.keys(_level).forEach((i) => {
-                if (_level[i].jid === userId) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                return _level[position].xp
-            }
-        }
+	let position = false
+	Object.keys(_level).forEach((i) => {
+		if (_level[i].jid === userId) {
+			position = i
+		}
+	})
+	if (position !== false) {
+		return _level[position].xp
+	}
+}
 
-        const getLevelingLevel = (userId) => {
-            let position = false
-            Object.keys(_level).forEach((i) => {
-                if (_level[i].jid === userId) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                return _level[position].level
-            }
-        }
+const getLevelingLevel = (userId) => {
+	let position = false
+	Object.keys(_level).forEach((i) => {
+		if (_level[i].jid === userId) {
+			position = i
+		}
+	})
+	if (position !== false) {
+		return _level[position].level
+	}
+}
 
-        const getLevelingId = (userId) => {
-            let position = false
-            Object.keys(_level).forEach((i) => {
-                if (_level[i].jid === userId) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                return _level[position].jid
-            }
-        }
+const getLevelingId = (userId) => {
+	let position = false
+	Object.keys(_level).forEach((i) => {
+		if (_level[i].jid === userId) {
+			position = i
+		}
+	})
+	if (position !== false) {
+		return _level[position].jid
+	}
+}
 
-        const addLevelingXp = (userId, amount) => {
-            let position = false
-            Object.keys(_level).forEach((i) => {
-                if (_level[i].jid === userId) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                _level[position].xp += amount
-                fs.writeFileSync('./database/json/level.json', JSON.stringify(_level))
-            }
-        }
+const addLevelingXp = (userId, amount) => {
+	let position = false
+	Object.keys(_level).forEach((i) => {
+		if (_level[i].jid === userId) {
+			position = i
+		}
+	})
+	if (position !== false) {
+		_level[position].xp += amount
+		fs.writeFileSync('./database/json/level.json', JSON.stringify(_level))
+	}
+}
 
-        const addLevelingLevel = (userId, amount) => {
-            let position = false
-            Object.keys(_level).forEach((i) => {
-                if (_level[i].jid === userId) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                _level[position].level += amount
-                fs.writeFileSync('./database/json/level.json', JSON.stringify(_level))
-            }
-        }
+const addLevelingLevel = (userId, amount) => {
+	let position = false
+	Object.keys(_level).forEach((i) => {
+		if (_level[i].jid === userId) {
+			position = i
+		}
+	})
+	if (position !== false) {
+		_level[position].level += amount
+		fs.writeFileSync('./database/json/level.json', JSON.stringify(_level))
+	}
+}
 
-        const addLevelingId = (userId) => {
-            const obj = {jid: userId, xp: 1, level: 1}
-            _level.push(obj)
-            fs.writeFileSync('./database/json/level.json', JSON.stringify(_level))
-        }
+const addLevelingId = (userId) => {
+	const obj = {jid: userId, xp: 1, level: 1}
+	_level.push(obj)
+	fs.writeFileSync('./database/json/level.json', JSON.stringify(_level))
+}
 //LEVEL FIN
 	
 function addMetadata(packname, author) {	
@@ -217,33 +220,34 @@ function addMetadata(packname, author) {
 		return `./${name}.exif`	
 	})	
 
-} 
+}  
 	
 function kyun(seconds){
-  function pad(s){
-    return (s < 10 ? '0' : '') + s;
+	function pad(s){
+	  return (s < 10 ? '0' : '') + s;
+	}
+	var hours = Math.floor(seconds / (60*60));
+	var minutes = Math.floor(seconds % (60*60) / 60);
+	var seconds = Math.floor(seconds % 60);
+  
+	//return pad(hours) + ':' + pad(minutes) + ':' + pad(seconds)
+	return `${pad(hours)} Horas ${pad(minutes)} Minutos ${pad(seconds)} Segundos`
   }
-  var hours = Math.floor(seconds / (60*60));
-  var minutes = Math.floor(seconds % (60*60) / 60);
-  var seconds = Math.floor(seconds % 60);
-
-  //return pad(hours) + ':' + pad(minutes) + ':' + pad(seconds)
-  return `${pad(hours)} Horas ${pad(minutes)} Minutos ${pad(seconds)} Segundos`
-}
-
-async function starts() {
-	const client = new WAConnection()
-	client.version = [2, 2147, 14]
-        client.logger.level = 'warn'
-	console.log(banner.string)
-	client.on('qr', () => {
-		console.log(color('[','white'), color('!','red'), color(']','white'), color('Escanea el codigo QR rapido!!!'))
-	})
-
-	fs.existsSync('./Nazwa.json') && client.loadAuthInfo('./Nazwa.json')
-	client.on('connecting', () => {
-		start('2', 'Estas desconectado')
-	})
+  
+  async function starts() {
+	  const client = new WAConnection()
+	  client.version = [2, 2147, 16]
+	  client.autoReconnect = ReconnectMode.onConnectionLost;
+		  client.logger.level = 'warn'
+	  console.log(banner.string)
+	  client.on('qr', () => {
+		  console.log(color('[','white'), color('!','red'), color(']','white'), color('Escanea el codigo QR rapido!!!'))
+	  })
+  
+	  fs.existsSync('./Nazwa.json') && client.loadAuthInfo('./Nazwa.json')
+	  client.on('connecting', () => {
+		  start('2', 'Estas desconectado')
+	  })
 	client.on('open', () => {
 		success('2', 'Conectado by Juan Del Valle')
 	})
@@ -662,13 +666,7 @@ if (budy.includes("https://m.facebook.com/")){
 		break
 		case 'shantera':
 		client.sendMessage(from, shantera(prefix, sender), text, {quoted: mek})
-		break
-					
-		/*case 'virtex':
-	       case 'troleo':
-               client.sendMessage(from, virtex(prefix, sender), text, {quoted: mek})
-               break*/
-                            
+		break               
 
 
 //FUNCIONES DE BAN Y DESBAN			
@@ -710,45 +708,56 @@ break
 					
 /******JUEGOS SHANDUY LA PUTA MADRE NO TE OLVIDES******/
 					
-case 'jhasdgfjkbsdjkfbsakjfbasjdfasdfjsadfj asdfsajd gfjsa g sajg sag':
+case 'fan':
 if (!isUser) return reply(mess.only.registroB)
 rate = body.slice(5)
 client.updatePresence(from, Presence.composing) 
 random = `${Math.floor(Math.random() * 100)}`
 fan = random
-if (fan < 20 ) {cu = ':v?'} else if (fan == 21 ) {cu = 'Te salvaste rattata 😎'} else if (fan == 23 ) {cu = 'Te salvaste rattata 😎'} else if (fan == 24 ) {cu = 'Te salvaste rattata 😎'} else if (fan == 25 ) {cu = 'Te salvaste rattata 😎'} else if (fan == 26 ) {cu = 'Te salvaste rattata 😎'} else if (fan == 27 ) {cu = 'Te salvaste rattata 😎'} else if (fan == 28 ) {cu = 'Te salvaste rattata 😎'} else if (fan == 29 ) {cu = 'Te salvaste rattata 😎'} else if (fan == 30 ) {cu = 'Te salvaste rattata 😎'} else if (fan == 31 ) {cu = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 32 ) {cu = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 33 ) {cu = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 34 ) {cu = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 35 ) {cu = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 36 ) {cu = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 37 ) {cu = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 38 ) {cu = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 39 ) {cu = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 40 ) {cu = 'Ramirez que hace viendo pidgey 🤔'} else if (fan == 41 ) {cu = 'Mmm sospechoso pidgey 🧐'} else if (fan == 42 ) {cu = 'Mmm sospechoso pidgey 🧐'} else if (fan == 43 ) {cu = 'Mmm sospechoso pidgey 🧐'} else if (fan == 44 ) {cu = 'Mmm sospechoso pidgey 🧐'} else if (fan == 45 ) {cu = 'Mmm sospechoso pidgey 🧐'} else if (fan == 46 ) {cu = 'Mmm sospechoso pidgey 🧐'} else if (fan == 47 ) {cu = 'Mmm sospechoso pidgey 🧐'} else if (fan == 48 ) {cu = 'Mmm sospechoso pidgey 🧐'} else if (fan == 49 ) {cu = 'Mmm sospechoso pidgey 🧐'} else if (fan == 50 ) {cu = 'Mmm sospechoso pidgey 🧐'} else if (fan > 51) {cu = 'Señores un autentico SEGUIDOR DEL TODOPODEROSO BIDOOF está en el grupo 🥸'}
-hasil = `${rate}Resultado ${random}% fan del TODOPODEROSO BIDOOF\n\n${cu}`
+if (fan < 20 ) {fan = ':v?'} else if (fan == 21 ) {fan = 'Te salvaste rattata 😎'} else if (fan == 23 ) {fan = 'Te salvaste rattata 😎'} else if (fan == 24 ) {fan = 'Te salvaste rattata 😎'} else if (fan == 25 ) {fan = 'Te salvaste rattata 😎'} else if (fan == 26 ) {fan = 'Te salvaste rattata 😎'} else if (fan == 27 ) {fan = 'Te salvaste rattata 😎'} else if (fan == 28 ) {fan = 'Te salvaste rattata 😎'} else if (fan == 29 ) {fan = 'Te salvaste rattata 😎'} else if (fan == 30 ) {fan = 'Te salvaste rattata 😎'} else if (fan == 31 ) {fan = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 32 ) {fan = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 33 ) {fan = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 34 ) {fan = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 35 ) {fan = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 36 ) {fan = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 37 ) {fan = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 38 ) {fan = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 39 ) {fan = 'Caterpie que hace viendo videos de cómo ser un seguidor del TODOPODEROSO BIDOOF? 🤔'} else if (fan == 40 ) {fan = 'Ramirez que hace viendo pidgey 🤔'} else if (fan == 41 ) {fan = 'Mmm sospechoso pidgey 🧐'} else if (fan == 42 ) {fan = 'Mmm sospechoso pidgey 🧐'} else if (fan == 43 ) {fan = 'Mmm sospechoso pidgey 🧐'} else if (fan == 44 ) {fan = 'Mmm sospechoso pidgey 🧐'} else if (fan == 45 ) {fan = 'Mmm sospechoso pidgey 🧐'} else if (fan == 46 ) {fan = 'Mmm sospechoso pidgey 🧐'} else if (fan == 47 ) {fan = 'Mmm sospechoso pidgey 🧐'} else if (fan == 48 ) {fan = 'Mmm sospechoso pidgey 🧐'} else if (fan == 49 ) {fan = 'Mmm sospechoso pidgey 🧐'} else if (fan == 50 ) {fan = 'Mmm sospechoso pidgey 🧐'} else if (fan > 51) {fan = 'Señores un autentico SEGUIDOR DEL TODOPODEROSO BIDOOF está en el grupo 🥸'}
+hasil = `${rate}Resultado ${random}% fan del TODOPODEROSO BIDOOF\n\n${fan}`
 reply(hasil)
 break
 
-case 'fan':
+case 'ksabldjalnasljasbdlabsld':
 if (!isUser) return reply(mess.only.registroB)
 rate = body.slice(9)
 client.updatePresence(from, Presence.composing) 
 random = `${Math.floor(Math.random() * 100)}`
-cuties = random
-if (cuties < 20 ) {cu = 'Mi loco usted va para el cielo 👏'} else if (cuties == 21 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 23 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 24 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 25 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 26 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 27 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 28 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 29 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 30 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 31 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 32 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 33 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 34 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 35 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 36 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 37 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 38 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 39 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 40 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 41 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 42 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 43 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 44 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 45 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 46 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 47 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 48 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 49 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 50 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties > 51) {cu = 'Señores un autentico FAN DE CUTIES esta en el grupo 🥸'}
-hasil = `${rate}Resultado ${random}% fan de cuties\n\n${cu}`
+fan = random
+if (fan < 20 ) {cu = 'Mi loco usted va para el cielo 👏'} else if (fan == 21 ) {fan = 'Te salvaste ramirez 😎'} else if (fan == 23 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 24 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 25 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 26 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 27 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 28 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 29 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 30 ) {cu = 'Te salvaste ramirez 😎'} else if (cuties == 31 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 32 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 33 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 34 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 35 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 36 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 37 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 38 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 39 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 40 ) {cu = 'Ramirez que hace viendo cuties 🤔'} else if (cuties == 41 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 42 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 43 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 44 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 45 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 46 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 47 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 48 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 49 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties == 50 ) {cu = 'Mmm sospechoso ramirez 🧐'} else if (cuties > 51) {cu = 'Señores un autentico FAN DE CUTIES esta en el grupo 🥸'}
+hasil = `${rate}Resultado ${random}% fan del todopoderoso *BIDOOF*\n\n${fan}`
 reply(hasil)
 break
-				  
+	
+case ',dsbfldbflibdjfsvdjkfhds':
+if (!isUser) return reply(mess.only.daftarB)
+rate = body.slice(9)
+client.updatePresence(from, Presence.composing) 
+random = `${Math.floor(Math.random() * 100)}`
+racista = random
+if (racista < 20 ) {ra = 'Tu no eres racista 👏'} else if (racista == 21 ) {ra = 'Mmm tengos mi dudas 🧐'} else if (racista == 23 ) {ra = 'Mmm tengos mi dudas 🧐'} else if (racista == 24 ) {ra = 'Mmm tengos mi dudas 🧐'} else if (racista == 25 ) {ra = 'Mmm tengos mi dudas 🧐'} else if (racista == 26 ) {ra = 'Mmm tengos mi dudas 🧐'} else if (racista == 27 ) {ra = 'Mmm tengos mi dudas 🧐'} else if (racista == 28 ) {ra = 'Mmm tengos mi dudas 🧐'} else if (racista == 29 ) {ra = 'Mmm tengos mi dudas 🧐'} else if (racista == 30 ) {ra = 'Mmm tengos mi dudas 🧐'} else if (racista == 31 ) {ra = 'Eres racista en secreto 🙀'} else if (racista == 32 ) {ra = 'Eres racista en secreto 🙀'} else if (racista == 33 ) {ra = 'Eres racista en secreto 🙀'} else if (racista == 34 ) {ra = 'Eres racista en secreto 🙀'} else if (racista == 35 ) {ra = 'Eres racista en secreto 🙀'} else if (racista == 36 ) {ra = 'Eres racista en secreto 🙀'} else if (racista == 37 ) {ra = 'Eres racista en secreto 🙀'} else if (racista == 38 ) {ra = 'Eres racista en secreto 🙀'} else if (racista == 39 ) {ra = 'Eres racista en secreto 🙀'} else if (racista == 40 ) {ra = 'Eres racista en secreto 🙀'} else if (racista == 41 ) {ra = 'Fuck men alto racista 😡'} else if (racista == 42 ) {ra = 'Fuck men alto racista 😡'} else if (racista == 43 ) {ra = 'Fuck men alto racista 😡'} else if (racista == 44 ) {ra = 'Fuck men alto racista 😡'} else if (racista == 45 ) {ra = 'Fuck men alto racista 😡'} else if (racista == 46 ) {ra = 'Fuck men alto racista 😡'} else if (racista == 47 ) {ra = 'Fuck men alto racista 😡'} else if (racista == 48 ) {ra = 'Fuck men alto racista 😡'} else if (racista == 49 ) {ra = 'Fuck men alto racista 😡'} else if (racista == 50 ) {ra = 'Fuck men alto racista 😡'} else if (racista > 51) {ra = 'UN AUTENTICO RACISTA 🥸'}
+hasil = `${rate}Usted es ${random}% racista\n\n${ra}`
+reply(hasil)
+break
+
 case 'ajsd fsa d sadg as gisabgjnas dg asdg asdg aisdngjkas dgias gi asig ahsg':
-try{
-if (!isUser) return reply(mess.only.registroB)
-if (!isGroup) return reply(mess.only.group)
-d = []
-teks = 'Top 5 de los mas gays del grupo\n\n'
-for(i = 0; i < 5; i++) {
-r = Math.floor(Math.random() * groupMetadata.participants.length + 0)
-teks += `➔ @${groupMembers[r].jid.split('@')[0]}\n`
-d.push(groupMembers[r].jid)
-}
-mentions(teks, d, true)
-} catch (e) {
-console.log(e)
-reply('Hubo un error intentalo nuevamente :/')
-}
-break				
+	try{
+		if (!isUser) return reply(mess.only.daftarB)
+		if (!isGroup) return reply(mess.only.group)
+		d = []
+		teks = 'Top 5 de los mas gays del grupo\n\n'
+		for(i = 0; i < 5; i++) {
+		r = Math.floor(Math.random() * groupMetadata.participants.length + 0)
+		teks += `➔ @${groupMembers[r].jid.split('@')[0]}\n`
+		d.push(groupMembers[r].jid)
+		}
+		mentions(teks, d, true)
+		} catch (e) {
+		console.log(e)
+		reply('Hubo un error intentalo nuevamente :/')
+		}
+		break					
 											
 /******JUEGOS SHANDUY LA PUTA MADRE NO TE OLVIDES******/					
 					
@@ -1077,8 +1086,8 @@ break
 case 'grupocr':
 client.updatePresence(from, Presence.composing) 
 options = {
-text: `El creador de este grupo es: @${from.split("-")[0]}`, 
-contextInfo: { mentionedJid: [from] }
+	text: `El propietario de este grupo es: wa.me/${from.split("-")[0]}`,
+	contextInfo: { mentionedJid: [from] }
 }
 client.sendMessage(from, options, text, { quoted: mek } )
 break
@@ -1377,7 +1386,7 @@ break
 		if (!isUser) return reply(mess.only.registroB)
                 reply(mess.only.musica)
                 play = body.slice(5)
-                anu = await fetchJson(`https://api.zeks.me/api/ytplaymp3?q=${play}&apikey=23hamilton`)
+                anu = await fetchJson(`https://api.zeks.me/api/ytplaymp3?q=${play}&apikey=28hamilton`)
                 if (anu.error) return reply(anu.error)
                 infomp3 = `*⌜Cancion Encontrada ✅⌟*\n◉ *Título:* ${anu.result.title}\n◉ *Fuente:* ${anu.result.source}\n◉ *Tamaño:* ${anu.result.size}\n\n*ESPERE ENVIANDO SU ARCHIVO MP3 ⚠*\n\n_*Servicio proveido por Juan Del Valle*_`
                 buffer = await getBuffer(anu.result.thumbnail)
@@ -1391,7 +1400,7 @@ break
 		if (!isUser) return reply(mess.only.registroB)
 	        reply(mess.only.musica2)
                 play = body.slice(5)
-                anu = await fetchJson(`https://api.zeks.me/api/ytplaymp3?q=${play}&apikey=23shanduy`)
+                anu = await fetchJson(`https://api.zeks.me/api/ytplaymp3?q=${play}&apikey=28shanduy`)
                 if (anu.error) return reply(anu.error)
                 infomp3 = `*⌜Cancion Encontrada ✅⌟*\n◉ *Título:* ${anu.result.title}\n◉ *Fuente:* ${anu.result.source}\n◉ *Tamaño:* ${anu.result.size}\n\n*ESPERE ENVIANDO SU ARCHIVO MP3 ⚠*\n\n_*Servicio proveido por Juan Del Valle*_`
                 buffer = await getBuffer(anu.result.thumbnail)
