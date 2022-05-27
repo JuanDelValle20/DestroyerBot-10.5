@@ -63,7 +63,7 @@ const { help } = require('./src/help');
 const { logomaker } = require('./database/menu/logomaker');
 const { toinmenu } = require('./src/toinmenu');
 const { menuadmin } = require('./src/menuadmin');
-const { nsfwmenu } = require('./src/nsfwmenu');
+const { nsfwminu } = require('./src/nsfwminu');
 const { desmenu } = require('./src/desmenu');
 const { version } = require('./src/version');
 const { juegos } = require('./src/juegos');
@@ -645,8 +645,8 @@ if (budy.includes("https://m.facebook.com/")){
 		case 'menuadmin':
 		client.sendMessage(from, menuadmin(prefix, sender), text, {quoted: mek})
 		break
-		case 'nsfwmenu':
-		client.sendMessage(from, nsfwmenu(prefix, sender), text, {quoted: mek})
+		case 'nsfwminu':
+		client.sendMessage(from, nsfwminu(prefix, sender), text, {quoted: mek})
 		break
 		case 'banmenu':
 		client.sendMessage(from, banmenu(prefix, sender), text, {quoted: mek})
@@ -731,7 +731,7 @@ reply(hasil)
 break
 	
 case ',dsbfldbflibdjfsvdjkfhds':
-if (!isUser) return reply(mess.only.daftarB)
+if (!isUser) return reply(mess.only.registroB)
 rate = body.slice(9)
 client.updatePresence(from, Presence.composing) 
 random = `${Math.floor(Math.random() * 100)}`
@@ -743,7 +743,7 @@ break
 
 case 'ajsd fsa d sadg as gisabgjnas dg asdg asdg aisdngjkas dgias gi asig ahsg':
 	try{
-		if (!isUser) return reply(mess.only.daftarB)
+		if (!isUser) return reply(mess.only.registroB)
 		if (!isGroup) return reply(mess.only.group)
 		d = []
 		teks = 'Top 5 de los mas gays del grupo\n\n'
@@ -1258,7 +1258,7 @@ break
 				case 'sticker':
 				case 'stickergif':
 				case 'stikergif':
-					if (!isUser) return reply(mess.only.daftarB)
+					if (!isUser) return reply(mess.only.registroB)
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 			 const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 			 const media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -1445,7 +1445,7 @@ break
 			if (isNsfw) return reply('Recursos Activados ✅')
 			nsfw.push(from)
 			fs.writeFileSync('./database/json/nsfw.json', JSON.stringify(nsfw))
-			reply('❬ ✅ ❭ La funcion NSFW esta habilitado en este grupo\n\nPara ver las opciones de nsfw enviar el comando *nsfwmenu')
+			reply('❬ ✅ ❭ La funcion NSFW esta habilitado en este grupo\n\nPara ver las opciones de nsfw enviar el comando *nsfwminu')
 		} else if (Number(args[0]) === 0) {
 			nsfw.splice(from, 1)
 			fs.writeFileSync('./database/json/nsfw.json', JSON.stringify(nsfw))
@@ -1460,7 +1460,7 @@ break
 	case 'waifu':
 		gatauda = body.slice(7)
 		reply(mess.wait)
-							if (!isUser) return reply(mess.only.daftarB)
+							if (!isUser) return reply(mess.only.registroB)
 		anu = await fetchJson(`https://arugaz.my.id/api/nekonime`, {method: 'get'})
 		buffer = await getBuffer(anu.result)
 		client.sendMessage(from, buffer, image,{quoted: mek})
@@ -1469,7 +1469,7 @@ break
 	case 'randomanime':
 		gatauda = body.slice(13)
 		reply(mess.wait)
-							if (!isUser) return reply(mess.only.daftarB)
+							if (!isUser) return reply(mess.only.registroB)
 		anu = await fetchJson(`https://tobz-api.herokuapp.com/api/randomanime?apikey=BotWeA`, {method: 'get'})
 		buffer = await getBuffer(anu.result)
 		client.sendMessage(from, buffer, image, {quoted: mek})
@@ -1477,7 +1477,7 @@ break
 				 case 'delete':
 		case 'del':
 		if (!isGroup)return reply(mess.only.group)
-							if (!isUser) return reply(mess.only.daftarB)
+							if (!isUser) return reply(mess.only.registroB)
 					client.deleteMessage(from, { id: mek.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
 		break
 	 case 'level':
