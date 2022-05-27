@@ -1779,10 +1779,6 @@ break
 						reply(`*😏 ¿Quieres que lo sepan todos?*\n\n*¿O que sea un secreto entre nosotros?*😏`)
 						}
 
-			  if (budy.includes(`Cuál es tu película favorita?`)) {
-						reply(`*Mi película favorita es WALL-E*\n\n*¿Por qué?*\n\n*Porque el amor entre robots si existe :3*`)
-						}
-
 			  if (budy.includes(`Cuál es tu película favorita`)) {
 						reply(`*Mi película favorita es WALL-E*\n\n*¿Por qué?*\n\n*Porque el amor entre robots si existe :3*`)
 						}
