@@ -1,14 +1,12 @@
 const help = (prefix) => {
 	return `
 
-⌜ _*DestroyerBot by Juan Del Valle*_ ⌟  
+⌜ _*DestroyerBot by HADES*_ ⌟  
 
 ◉ *INFORMACION*
    ○ Comando: ⌜ ${prefix} ⌟
-   ○ Editor: Juan Del Valle 
+   ○ Creador: HADES 
 
-◉ *COMUNICADO*
-Si en dado caso algún comando fallase,favor de escribirme por privado para tratar de solucionar el problema
 
 ◉ *PARA USAR EL BOT*
 Registrate con el comando ${prefix}registro y tu nombre
@@ -42,7 +40,7 @@ Comando de bienvenida solo grupos
   ║
   ╠ ○ ${prefix}sticker
   ╠ ○ ${prefix}attp
-  ╠ Mas un texto corto
+  ╠ Coloca un texto pero sin emojis no tildes
   ╠ ○ ${prefix}stickergif
   ╚ 6 segundos de video
 
@@ -97,7 +95,8 @@ Comando de bienvenida solo grupos
 Para usar estas funciones el bot necesita admin
   
 
-_*by Juan Del Valle*_
+
+_*by HADES*_
 `
 }
 
