@@ -333,7 +333,7 @@ function kyun(seconds){
 					insta: 'Calmado 😎\n\n*Estoy descargando tu post 🔄*\n\nAguarde un momento, por favor\n\n_*by Juan del Valle*_',
 					musica: 'Calmado pa estoy bucando tu canción 😎\n\n*Recuerda colocar bien el nombre de la cancion o el link del video de youtube*\n\n*Si el comando *play no funciona utiliza el comando *play2*\n\nSi no envío tu música checa que versión tienes del bot con *version\n\n_*by Juan del Valle*_',
 					musica2: 'Calmado pa estoy bucando tu canción 😎\n\n*Recuerda colocar bien el nombre de la cancion o el link del video de youtube*\n\n*Si el comando *play2 no funciona utiliza el comando *play*\n\nSi no envío tu música checa que versión tienes del bot con *version\n\n_*by Juan del Valle*_',
-					registroB: `「NO ESTAS REGISTRADO」\n\nMORTAL NO APARECES EN MI BASE DE DATOS ✋🥸🤚\n\nPara poder usarme escribe el siguente comando\n\nComando: ${prefix}registro Nombre\nEjemplo: ${prefix}registro Juan del Valle`,
+					registroB: `「NO ESTAS REGISTRADO」\n\nMORTAL NO APARECES EN MI BASE DE DATOS ✋🥸🤚\n\nPara poder usarme escribe el siguente comando\n\nComando: ${prefix}registro Nombre\nEjemplo: ${prefix}registro DestroyerBot`,
 				}
 			}
     			const apakah = ['Si','No']
