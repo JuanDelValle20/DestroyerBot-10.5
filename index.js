@@ -1778,6 +1778,26 @@ break
 			  if (budy.includes(`Oye bot tu y yo que somos`)) {
 						reply(`*😏 ¿Quieres que lo sepan todos?*\n\n*¿O que sea un secreto entre nosotros?*😏`)
 						}
+
+			  if (budy.includes(`Cuál es tu película favorita?`)) {
+						reply(`*Mi película favorita es WALL-E*\n\n*¿Por qué?*\n\n*Porque el amor entre robots si existe :3*`)
+						}
+
+			  if (budy.includes(`Cuál es tu película favorita`)) {
+						reply(`*Mi película favorita es WALL-E*\n\n*¿Por qué?*\n\n*Porque el amor entre robots si existe :3*`)
+						}
+							
+			  if (budy.includes(`Cual es tu película favorita`)) {
+						reply(`*Mi película favorita es WALL-E*\n\n*¿Por qué?*\n\n*Porque el amor entre robots si existe :3*`)
+						}
+
+			  if (budy.includes(`cual es tu película favorita`)) {
+						reply(`*Mi película favorita es WALL-E*\n\n*¿Por qué?*\n\n*Porque el amor entre robots si existe :3*`)
+						}
+				
+	   		  if (budy.includes(`cuál es tu película favorita`)) {
+						reply(`*Mi película favorita es WALL-E*\n\n*¿Por qué?*\n\n*Porque el amor entre robots si existe :3*`)
+						}
 	if (isGroup && isSimi && budy != undefined) {
 						console.log(budy)
 						muehe = await simih(budy)
