@@ -1617,7 +1617,7 @@ break
 				if (!isNsfw) return reply('❌ *NSFW Desactivado* ❌')
 				res = await fetchJson(`https://meme-api.herokuapp.com/gimme/yuri`, {method: 'get'})
 				buffer = await getBuffer(res.url)
-				client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Ay 😈'})
+				client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Tremendas tijeras 🤤'})
 			} catch (e) {
 				console.log(`Error :`, color(e,'red'))
 				reply('❌ *ERROR* ❌') 
