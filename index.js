@@ -1532,7 +1532,7 @@ break
 				if (!isNsfw) return reply('❌ *NSFW Desactivado* ❌')
 				res = await fetchJson(`https://meme-api.herokuapp.com/gimme/biganimetiddies`, {method: 'get'})
 				buffer = await getBuffer(res.url)
-				client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Quiero ver tetas'})
+				client.sendMessage(from, buffer, image, {quoted: mek, caption: 'La vieja de gabo, tremenda puta'})
 			} catch (e) {
 				console.log(`Error :`, color(e,'red'))
 				reply('❌ *ERROR* ❌')
@@ -1545,7 +1545,7 @@ break
 				if (!isNsfw) return reply('❌ *NSFW Desactivado* ❌')
 				res = await fetchJson(`https://meme-api.herokuapp.com/gimme/sideoppai`, {method: 'get'})
 				buffer = await getBuffer(res.url)
-				client.sendMessage(from, buffer, image, {quoted: mek, caption: 'La vieja de gabo, tremenda puta'})
+				client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Quiero ver tetas'})
 			} catch (e) {
 				console.log(`Error :`, color(e,'red'))
 				reply('❌ *ERROR* ❌')
