@@ -10,41 +10,53 @@ Cualquier copia que utilize mi ApiKey sera dado de baja
 * Nada
 */
 
-const { 
-	WAConnection,
-	MessageType, 
-	ReconnectMode, 
-	Presence, 
-	Mimetype, 
-	rugaapi, 
-	GroupSettingChange 
-} = require ('@adiwajshing/baileys')
+import WAConnection from '@adiwajshing/baileys';
+import 	MessageType from '@adiwajshing/baileys';
+import ReconnectMode from '@adiwajshing/baileys';
+import Presence from '@adiwajshing/baileys';
+import Mimetype from '@adiwajshing/baileys';
+import rugaapi from '@adiwajshing/baileys';
+import groupSettingChange from '@adiwajshing/baileys';
 
 /******COMIENZO DE LA ENTRADA DEL ARCHIVO******/
-const { color, bgcolor } = require('./lib/color');
-const { bahasa } = require('./src/bahasa');								
-const { negara } = require('./src/kodenegara');										
-const { virtex } = require('./src/virtex');
-const { wait, pegatinas, musica, simih, getBuffer, h2k, generateMessageID, getGroupAdmins, getRandom, banner, start, info, success, close } = require('./lib/functions');
-const { fetchJson } = require('./lib/fetcher');
-const { recognize } = require('./lib/ocr');
+import color from './lib/color';
+import bgcolor from './lib/color'
+import bahasa from './src/bahasa';
+import negara from './src/kodenegara';
+import virtex from './src/virtex';
+import wait from './lib/functions';
+import pegatinas from './lib/functions';
+import musica from './lib/functions';
+import simih from './lib/functions';
+import getBuffer from './lib/functions';
+import h2k from './lib/functions';
+import generateMessageID from './lib/functions';
+import getGroupAdmins from './lib/functions';
+import getRandom from './lib/functions';
+import banner from './lib/functions';
+import start from './lib/functions';
+import info from './lib/functions';
+import success from './lib/functions';
+import close from './lib/functions';
+import fetchJson from './lib/fetcher';
+import recognize from './lib/ocr';
 /******FIN DE ENTRADA DE ARCHIVO******/
 
 /******COMIENZO DE LA ENTRADA DEL PAQUETE NPM******/
-const fs = require('fs');
-const moment = require('moment-timezone');
-const { exec } = require('child_process');
-let FormData = require('form-data');
-const kagApi = require('@kagchi/kag-api');
-const axios = require("axios");
+import fs from 'fs';
+import moment from 'moment-timezone';
+import { exec } from 'child_process';
+import FormData from 'form-data';
+import kagApi from '@kagchi/kag-api';
+import axios from 'axios';
 import fetch from 'node-fetch';
-/*const tiktod = require('tiktok-scraper')*/
-const ffmpeg = require('fluent-ffmpeg');
-const { removeBackgroundFromImageFile } = require('remove.bg');
-/*const imgbb = require('imgbb-uploader')*/
-const lolis = require('lolis.life');
+/*import tiktod from 'tiktok-scraper'*/
+import Ffmpeg from 'fluent-ffmpeg';
+import { removeBackgroundFromImageFile } from 'remove.bg';
+/*import imgbb from 'imgbb-uploader'*/
+import lolis from 'lolis.life';
 const loli = new lolis();
-const speed = require('performance-now');
+import speed from 'performance-now';
 /******FIN DE ENTRADA DEL PAQUETE NPM******/
 
 /******COMIENZO DE LA ENTRADA JSON******/
@@ -59,20 +71,20 @@ const _level = JSON.parse(fs.readFileSync('./database/json/level.json'));
 /******FIN DE ENTRADA JSON******/
 
 /******INICIO DE LA ENTRADA DEL MENÚ******/
-const { help } = require('./src/help');
-const { logomaker } = require('./database/menu/logomaker');
-const { toinmenu } = require('./src/toinmenu');
-const { menuadmin } = require('./src/menuadmin');
-const { nsfwminu } = require('./src/nsfwminu');
-const { desmenu } = require('./src/desmenu');
-const { version } = require('./src/version');
-const { juegos } = require('./src/juegos');
-const { shantera } = require('./src/shantera');
-const { antimenu } = require('./src/antimenu');
-const { welmenu } = require('./src/welmenu');
-const { banmenu } = require('./src/banmenu');
-const { otak } = require('./src/otak');
-const { levelmenu } = require('./src/levelmenu');
+import help from './src/help';
+import logomaker from'./database/menu/logomaker';
+import toinmenu from './src/toinmenu';
+import menuadmin from './src/menuadmin';
+import nsfwminu from './src/nsfwminu';
+import desmenu from './src/desmenu';
+import version from './src/version';
+import juegos from './src/juegos';
+import shantera from './src/shantera';
+import antimenu from './src/antimenu';
+import welmenu from './src/welmenu';
+import banmenu from './src/banmenu';
+import otak from './src/otak';
+import levelmenu from './src/levelmenu';
 /******FIN DE ENTRADA DEL MENÚ******/
 
 /******CARGA DE ENTRADA VCARD******/
@@ -234,7 +246,7 @@ function kyun(seconds){
   }
   
   async function starts() {
-	  const client = new WAConnection()
+	const client = new WAConnection()
 	  client.version = [2, 2147, 16]
 	  client.autoReconnect = ReconnectMode.onConnectionLost;
 		  client.logger.level = 'warn'
@@ -336,12 +348,12 @@ function kyun(seconds){
 					registroB: `「NO ESTAS REGISTRADO」\n\nMORTAL NO APARECES EN MI BASE DE DATOS ✋🥸🤚\n\nPara poder usarme escribe el siguente comando\n\nComando: ${prefix}registro Nombre\nEjemplo: ${prefix}registro DestroyerBot`,
 				}
 			}
-    			const apakah = ['Si','No']
-                        const kapankah = ['Otro día','Otra semana','Otro mes','Otro año']
+			const apakah = ['Si','No']
+			const kapankah = ['Otro día','Otra semana','Otro mes','Otro año']
 			const botNumber = client.user.jid
 			const ownerNumber = ["50241033780@s.whatsapp.net"] // replace this with your number
 			const nomorOwner = [ownerNumber]
-	                const isGroup = from.endsWith('@g.us')
+			const isGroup = from.endsWith('@g.us')
 			const totalchat = await client.chats.all()
 			const sender = isGroup ? mek.participant : mek.key.remoteJid
 			const groupMetadata = isGroup ? await client.groupMetadata(from) : ''
@@ -356,18 +368,18 @@ function kyun(seconds){
 			const isAntiWa = isGroup ? antiwa.includes(from) : false
 			const groupId = isGroup ? groupMetadata.jid : ''
 			const groupMembers = isGroup ? groupMetadata.participants : ''
-                        const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : ''
+			const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : ''
 			const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
 			const isGroupAdmins = groupAdmins.includes(sender) || false
 			const isWelkom = isGroup ? welkom.includes(from) : false
 			const isNsfw = isGroup ? nsfw.includes(from) : false
 			const isSimi = isGroup ? samih.includes(from) : false
 			const isOwner = ownerNumber.includes(sender)
-                        const isUser = user.includes(sender)
-                        const isLevelingOn = isGroup ? _leveling.includes(groupId) : false
-                        const NomerOwner = '50241033780@s.whatsapp.net'
-                        const conts = mek.key.fromMe ? client.user.jid : client.contacts[sender] || { notify: jid.replace(/@.+/, '') }
-                        const pushname = mek.key.fromMe ? client.user.name : conts.notify || conts.vname || conts.name || '-'
+			const isUser = user.includes(sender)
+			const isLevelingOn = isGroup ? _leveling.includes(groupId) : false
+			const NomerOwner = '50241033780@s.whatsapp.net'
+			const conts = mek.key.fromMe ? client.user.jid : client.contacts[sender] || { notify: jid.replace(/@.+/, '') }
+			const pushname = mek.key.fromMe ? client.user.name : conts.notify || conts.vname || conts.name || '-'
 			
 			//......................
 			
@@ -547,15 +559,15 @@ if (budy.includes("https://m.facebook.com/")){
 //FUNCION DE LEVEL
             
      if (isGroup && isLevelingOn) {
-            const currentLevel = getLevelingLevel(sender)
-            const checkId = getLevelingId(sender)
+		const currentLevel = getLevelingLevel(sender)
+		const checkId = getLevelingId(sender)
             try {
                 if (currentLevel === undefined && checkId === undefined) addLevelingId(sender)
                 const amountXp = Math.floor(Math.random() * 10) + 500
-                const requiredXp = 5000 * (Math.pow(2, currentLevel) - 1)
+                const fromdXp = 5000 * (Math.pow(2, currentLevel) - 1)
                 const getLevel = getLevelingLevel(sender)
                 addLevelingXp(sender, amountXp)
-                if (requiredXp <= getLevelingXp(sender)) {
+                if (fromdXp <= getLevelingXp(sender)) {
                     addLevelingLevel(sender, 1)
                     await reply(`*「 FELICIDADES LEVEL UP 🆙🥳 」*\n\nFelicidades subiste de nivel sigue asi 👏\n\n*NOMBRE*\n${pushname}\n*XP*: ${getLevelingXp(sender)}\n*NIVEL*: ${getLevel} ⟿ ${getLevelingLevel(sender)}\n\n_*Para ver tu XP en tiempo real coloca el comando ${prefix}level*_`)
                 }
@@ -568,10 +580,10 @@ if (budy.includes("https://m.facebook.com/")){
 			
          		
                         colors = ['red','white','black','blue','yellow','green']
-			const isMedia = (type === 'imageMessage' || type === 'videoMessage')
-			const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
-			const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
-			const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
+						const isMedia = (type === 'imageMessage' || type === 'videoMessage')
+						const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
+						const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
+						const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
 			if (!isGroup && isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32mEXEC\x1b[1;37m]', time, color(command), 'from', color(sender.split('@')[0]), 'args :', color(args.length))
 			if (!isGroup && !isCmd) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;31mRECV\x1b[1;37m]', time, color('Message'), 'from', color(sender.split('@')[0]), 'args :', color(args.length))
 			if (isCmd && isGroup) console.log('\x1b[1;31m~\x1b[1;37m>', '[\x1b[1;32mEXEC\x1b[1;37m]', time, color(command), 'from', color(sender.split('@')[0]), 'in', color(groupName), 'args :', color(args.length))
@@ -779,7 +791,7 @@ case 'ajsd fsa d sadg as gisabgjnas dg asdg asdg aisdngjkas dgias gi asig ahsg':
 	case 'creador':
 	       client.sendMessage(from, {displayname: "Juan", vcard: vcard}, MessageType.contact, { quoted: mek})
 		   client.sendMessage(from, 'Arriba está el número del creador del bot <DestroyerBot ву Juan del Valle>\n\nNO SOY UN BOT \n\nAhi puedes resolver tus preguntas y errores :)\n\nEste no es el número del propietario del bot que estas usando ahora mismo. Si no, del creador de la base de datos del bot o sea Juan\n\nву Juan del Valle',MessageType.text, { quoted: mek} )
-                const none = fs.readFileSync('0');
+		   const none = fs.readFileSync('0');
 		client.sendMessage(from, none, MessageType.audio, {quoted: mek, mimetype: 'audio/mp4', ptt:true})
                 break
 	
@@ -807,7 +819,7 @@ case 'ajsd fsa d sadg as gisabgjnas dg asdg asdg aisdngjkas dgias gi asig ahsg':
 				   client.updatePresence(from, Presence.recording) 
 				   if (args.length < 1) return client.sendMessage(from, 'Cual es el código de idioma?\n\nPara saber el codigo de idioma coloque el comando ${prefix}idioma', text, {quoted: mek})
                                    if (!isUser) return reply(mess.only.registroB)
-					const gtts = require('./lib/gtts')(args[0])
+								   const gtts = from('./lib/gtts')(args[0])
 					if (args.length < 2) return client.sendMessage(from, 'Y el texto?', text, {quoted: mek})
 					dtt = body.slice(8)
 					ranm = getRandom('.mp3')
@@ -1260,8 +1272,8 @@ break
 				case 'stikergif':
 					if (!isUser) return reply(mess.only.registroB)
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
-			 const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-			 const media = await client.downloadAndSaveMediaMessage(encmedia)
+						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
+						const media = await client.downloadAndSaveMediaMessage(encmedia)
 									 ran = getRandom('.webp')
 			 await ffmpeg(`./${media}`)
 				 .input(media)
@@ -1289,8 +1301,8 @@ break
 				 .toFormat('webp')
 				 .save(ran)
 			 } else if ((isMedia && mek.message.videoMessage.seconds < 11 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
-			 const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-			 const media = await client.downloadAndSaveMediaMessage(encmedia)
+				const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
+				const media = await client.downloadAndSaveMediaMessage(encmedia)
 			 ran = getRandom('.webp')
 			 reply(mess.only.pegatina)
 			 await ffmpeg(`./${media}`)
@@ -1629,8 +1641,8 @@ break
 						
                                 case 'ping':    
 			   	        if (!isUser) return reply(mess.only.userB)
-                                        const timestamp = speed();
-                                        const latensi = speed() - timestamp
+						   const timestamp = speed();
+						   const latensi = speed() - timestamp
                                         client.updatePresence(from, Presence.composing) 
 				        uptime = process.uptime()
                                         client.sendMessage(from, `Velocidad: *${latensi.toFixed(4)} _Second_*\nDevice: *Samsung J7 NEO*\nRAM: *2GB*\nData: *16GB*\nRed: *4G*\nEstado: *Posiblemente cargando*`, text, { quoted: mek})
